@@ -125,6 +125,69 @@ def UCS():
     heap= []
     heapq.heappush(heap, (0, v,-1))
     #print("heap=",heap)
+    while(1):        
+        if not heap:
+           #print(99)
+           #result= "FAIL"
+           break
+        else: 
+              #print(100)
+              v=heapq.heappop(heap)
+              #print(v)
+              n=v[1]
+              #print(n)
+              j=n[0]
+              i=n[1] 
+              #print(i)
+              #print(j)
+              if(visited[i][j]==1):
+                  continue
+              else:
+                  visited[i][j]=1
+                  parent[i][j]=v[2]
+        if(v[1] in targetsite):
+           targetsfound+=1 
+           index= targetsite.index(v[1])
+           #print("index=",index)
+           result[index]="PASS"
+           print("cost of ",v[1]," is ",v[0])
+           #print("targetsfound",targetsfound)
+        if(targetsfound == no_of_targets):
+            break
+        else:
+            n=v[1]
+            #print(n)
+            j=n[0]
+            i=n[1] 
+            #print(i)
+            #print(j)
+            if(i-1 >= 0 and i-1 <h and j>=0 and j<w):
+                  if(abs(adj[i-1][j]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+10,[j,i-1],[j,i] ))
+            if(i-1 >= 0 and i-1 <h and j+1>=0 and j+1<w):
+                  if(abs(adj[i-1][j+1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+14,[j+1,i-1],[j,i]))
+            if(i >= 0 and i<h and j+1>=0 and j+1<w): 
+                  if(abs(adj[i][j+1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+10,[j+1,i],[j,i]))
+            if(i+1 >= 0 and i+1 <h and j+1>=0 and j+1<w):
+                  if(abs(adj[i+1][j+1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+14,[j+1,i+1],[j,i]))
+            if(i+1 >= 0 and i+1 <h and j>=0 and j<w): 
+                  if(abs(adj[i+1][j]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+10,[j,i+1],[j,i]))
+            if(i+1 >= 0 and i+1 <h and j-1>=0 and j-1<w):
+                  if(abs(adj[i+1][j-1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+14,[j-1,i+1],[j,i]))
+            if(i >= 0 and i <h and j-1>=0 and j-1<w):
+                  if(abs(adj[i][j-1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+10,[j-1,i],[j,i]))
+            if(i-1 >= 0 and i-1 <h and j-1>=0 and j-1<w):
+                  if(abs(adj[i-1][j-1]-adj[i][j])<= threshold):
+                       heapq.heappush(heap, (v[0]+14,[j-1,i-1],[j,i]))
+    counter=range(no_of_targets)
+    #print("counter=",counter)    
+    final = result
     
                  
 if __name__ == '__main__': 
