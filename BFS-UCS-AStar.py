@@ -119,6 +119,12 @@ def BFS():
           wc+=1
     o.write(final[wc])
     o.close()
+
+def UCS():
+    global targetsfound,result,v,targetsite
+    heap= []
+    heapq.heappush(heap, (0, v,-1))
+    #print("heap=",heap)
     
                  
 if __name__ == '__main__': 
