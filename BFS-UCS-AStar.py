@@ -188,6 +188,44 @@ def UCS():
     counter=range(no_of_targets)
     #print("counter=",counter)    
     final = result
+    for i in counter:
+     if(result[i]=="FAIL"):
+       print(result[i])  
+     else:
+      #counter=range(no_of_targets)
+      #print("counter=",counter)
+      #for i in counter:
+          v=targetsite[i]
+          #print("target=",v)
+          #print("i=",i)
+          y=v[0]
+          x=v[1]
+          #print(x,y)
+          final[i]=(str(v[0]) + "," + str(v[1]))
+          #print("target=",v)
+          r=parent[x][y]
+          #print("r=",r)
+          while(r!= -1):
+               #b=parent[x][y][0]
+               #a=parent[x][y][1]
+               #print("r=",r)
+               a= r[1]
+               b= r[0] 
+               final[i]=str(r[0])+","+str(r[1])+" "+final[i]
+               x=a
+               y=b
+               #print(y,x," ")
+               r=parent[x][y]
+    #print(final)
+    o=open("output.txt","w+")
+    wc=0
+    while(wc < no_of_targets-1):
+          o.write(final[wc]+"\n")
+          wc+=1
+    o.write(final[wc])   
+    #o.write(final[0])
+    #o.write(final[1])
+    o.close()
     
                  
 if __name__ == '__main__': 
