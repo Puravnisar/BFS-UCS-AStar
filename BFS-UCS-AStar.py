@@ -227,6 +227,25 @@ def UCS():
     #o.write(final[1])
     o.close()
     
+def Astar():
+    global targetsfound,result,v,targetsite
+    final=["FAIL" for i in range(no_of_targets)]
+    for t in range(no_of_targets):
+        v=landing
+        resultA="FAIL"
+        target=targetsite[t]
+        #print("target=",target)
+        visited=[[0 for i in range(w)] for j in range(h)]
+        #print("visited",visited)
+        parent=[[ -1 for i in range(w)] for j in range(h)]
+        #print("parent",parent)
+        hn=[[0 for i in range(w)] for j in range(h)]
+        for i in range(h):
+            for j in range(w):
+                hn[i][j]= math.sqrt((target[1]-i)*(target[1]-i)+(target[0]-j)*(target[0]-j))*10 +abs(adj[i][j]-adj[target[1]][target[0]])
+        heap= []
+        heapq.heappush(heap, (hn[v[1]][v[0]],0, v,-1))
+        #print("heap=",heap)
                  
 if __name__ == '__main__': 
      if("BFS" in data[0]):
