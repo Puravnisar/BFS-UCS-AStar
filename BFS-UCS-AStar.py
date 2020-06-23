@@ -246,6 +246,102 @@ def Astar():
         heap= []
         heapq.heappush(heap, (hn[v[1]][v[0]],0, v,-1))
         #print("heap=",heap)
+        while(1):        
+            if not heap:
+               #print(99)
+               #result= "FAIL"
+               break
+            else: 
+              v=heapq.heappop(heap)
+              n=v[2]
+              j=n[0]
+              i=n[1] 
+              if(visited[i][j]==1):
+                  continue
+              else:
+                  visited[i][j]=1
+                  parent[i][j]=v[3]
+            if(v[2] == target):
+               targetsfound+=1 
+               resultA="PASS"
+               print("cost of ",v[2]," is ",v[1])
+            if(targetsfound == no_of_targets):
+               break
+            else:
+                n=v[2]
+                #print(n)
+                j=n[0]
+                i=n[1] 
+                if(i-1 >= 0 and i-1 <h and j>=0 and j<w):
+                      ele=abs(adj[i-1][j]-adj[i][j])                  
+                      if(ele<= threshold):
+                           cost=v[1]+10+ele
+                           f=hn[i-1][j]+cost
+                           heapq.heappush(heap, (f,cost,[j,i-1],[j,i] ))
+                if(i-1 >= 0 and i-1 <h and j+1>=0 and j+1<w):
+                      ele=abs(adj[i-1][j+1]-adj[i][j])
+                      if(ele<= threshold):
+                           cost=v[1]+14+ele
+                           f=hn[i-1][j+1]+cost
+                           heapq.heappush(heap, (f,cost,[j+1,i-1],[j,i]))
+                if(i >= 0 and i<h and j+1>=0 and j+1<w):
+                      ele=abs(adj[i][j+1]-adj[i][j])                      
+                      if(ele<= threshold):
+                           cost=v[1]+10+ele
+                           f=hn[i][j+1]+cost
+                           heapq.heappush(heap, (f,cost,[j+1,i],[j,i]))
+                if(i+1 >= 0 and i+1 <h and j+1>=0 and j+1<w):
+                      ele=abs(adj[i+1][j+1]-adj[i][j])
+                      if(ele<= threshold):
+                           cost=v[1]+14+ele
+                           f=hn[i+1][j+1]+cost
+                           heapq.heappush(heap, (f,cost,[j+1,i+1],[j,i]))
+                if(i+1 >= 0 and i+1 <h and j>=0 and j<w):
+                        ele=abs(adj[i+1][j]-adj[i][j])
+                        if(ele<= threshold):
+                           cost=v[1]+10+ele
+                           f=hn[i+1][j]+cost
+                           heapq.heappush(heap, (f,cost,[j,i+1],[j,i]))
+                if(i+1 >= 0 and i+1 <h and j-1>=0 and j-1<w):
+                      ele=abs(adj[i+1][j-1]-adj[i][j])
+                      if(ele<= threshold):
+                           cost=v[1]+14+ele
+                           f=hn[i+1][j-1]+cost
+                           heapq.heappush(heap, (f,cost,[j-1,i+1],[j,i]))
+                if(i >= 0 and i <h and j-1>=0 and j-1<w):
+                      ele=abs(adj[i][j-1]-adj[i][j])
+                      if(ele<= threshold):
+                           cost=v[1]+10+ele
+                           f=hn[i][j-1]+cost
+                           heapq.heappush(heap, (f,cost,[j-1,i],[j,i]))
+                if(i-1 >= 0 and i-1 <h and j-1>=0 and j-1<w):
+                      ele=abs(adj[i-1][j-1]-adj[i][j])
+                      if(ele<= threshold):
+                           cost=v[1]+14+ele
+                           f=hn[i-1][j-1]+cost
+                           heapq.heappush(heap, (f,cost,[j-1,i-1],[j,i]))
+        final[t] = resultA
+        if(resultA !="FAIL"):
+           v=target
+           y=v[0]
+           x=v[1]
+           final[t]=(str(v[0]) + "," + str(v[1]))
+           r=parent[x][y]
+           while(r!= -1):
+                 a= r[1]
+                 b= r[0] 
+                 final[t]=str(r[0])+","+str(r[1])+" "+final[t]
+                 x=a
+                 y=b
+                 r=parent[x][y]
+    o=open("output.txt","w+")
+    wc=0
+    while(wc < no_of_targets-1):
+          o.write(final[wc]+"\n")
+          wc+=1
+    o.write(final[wc])   
+    o.close()
+    
                  
 if __name__ == '__main__': 
      if("BFS" in data[0]):
