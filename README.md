@@ -12,8 +12,7 @@ PS. This was homework #1 of CSCI 561 - Fall 2019 - Foundations of Artificial Int
 
 ## Setup
 
-- [MinGW](https://sourceforge.net/projects/mingw/) is required in order to run the executable file.
-- [Download](https://github.com/puravnisar/BFS-UCS-AStar/BFS-UCS-AStar) this executable file (Windows Only).
+- [Download](https://github.com/puravnisar/BFS-UCS-AStar/) this executable file (Windows Only).
 - Run "BFS-UCS-AStar.py".
 - The program will auto-generate an "output.txt" file with the results inside the text file.
 
